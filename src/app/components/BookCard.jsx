@@ -13,11 +13,14 @@ export default function BookCard({ livro }) {
       />
       <div className="p-4">
         <h2 className="text-lg font-semibold mb-1">{dadosDoLivro.title}</h2>
-        <p className="text-sm text-gray-300 mb-2">{dadosDoLivro.authors}</p>
-        <Link href={`/books/${dadosDoLivro.id}`}>
-          <button className="mt-2 px-4 py-2 bg-[#feb633] text-white text-bold rounded hover:bg-yellow-500 hover:text-gray-200 transition font-semibold">
-            Ver mais
-          </button>
+        <p className="text-sm text-gray-300 mb-2">
+          {dadosDoLivro.authors?.join(", ")}
+        </p>
+        <Link
+          href={`/books/${livroId}`}
+          className="mt-2 px-4 py-2 bg-[#feb633] text-white text-bold rounded hover:bg-yellow-500 hover:text-gray-200 transition font-semibold"
+        >
+          Ver mais
         </Link>
       </div>
     </div>

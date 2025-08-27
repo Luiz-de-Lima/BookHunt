@@ -21,10 +21,10 @@ export default function BookDetails({ params }) {
 
   return (
     <div className="container mx-auto p-4 max-w-2xl">
-      <Link href="/">
-        <button className="mb-4 px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+      <Link href="/" className="mb-4 px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
+       
           ← Voltar para a lista
-        </button>
+       
       </Link>
       <div className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
         {volumeInfo.imageLinks?.thumbnail && (
