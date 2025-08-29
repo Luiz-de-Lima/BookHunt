@@ -1,30 +1,68 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, use } from "react";
 import { getBookDetails } from "../services/services";
 
 export default function BookDetails({ params }) {
-  const { id } = params;
+  const resolvedParams = use(params);
+  const { id } = resolvedParams;
+
   const [bookData, setBookData] = useState(null);
-  const [favoriteBook, setFavoriteBook] = useState(null);
+  const [favoriteBook, setFavoriteBook] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const storedFavorites = localStorage.getItem("favoriteBooks");
     if (storedFavorites) {
-      booksFavorite = JSON.parse(storedFavorites);
+      const booksFavorite = JSON.parse(storedFavorites);
       setFavoriteBook(booksFavorite);
     }
-  }, [booksFavorite]);
+  }, []);
   useEffect(() => {
     localStorage.setItem("favoriteBooks", JSON.stringify(favoriteBook));
-  });
+  }, [favoriteBook]);
 
+  useEffect(() => {
+    if (id) {
+      const fetchDetails = async () => {
+        try {
+          setIsLoading(true);
+          const data = await getBookDetails(id);
+          setBookData(data);
+        } catch (error) {
+          console.error("Erro ao carregador os detalhes do livro", error);
+          setBookData(null);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchDetails();
+      console.log(bookData);
+    }
+  }, [id]);
+  const toggleFavorite = () => {
+    const isFavoriteBook = favoriteBook.includes(id);
+    if (isFavoriteBook) {
+      setFavoriteBook(favoriteBook.filter((bookId) => bookId !== id));
+    } else {
+      setFavoriteBook([...favoriteBook, id]);
+    }
+  };
+  if (isLoading) {
+    // Verifica o estado de carregamento
+    return <p>Carregando detalhes do livro...</p>;
+  }
+  if (!bookData || bookData.error) {
+    return <p>Livro não encontrado ou erro ao carregar.</p>;
+  }
+  const { volumeInfo } = bookData;
+  console.log(volumeInfo);
   return (
-    <div className="container mx-auto p-4 max-w-2xl">
-      <Link href="/" className="mb-4 px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-       
+    <div className="container mx-auto p-4 max-w-2xl bg-[#e8edf7bd]">
+      <Link href="/">
+        <button className="mb-4 px-4 py-2 bg-[#feb633] text-gray-700 font-semibold rounded hover:bg-yellow-400">
           ← Voltar para a lista
-       
+        </button>
       </Link>
       <div className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
         {volumeInfo.imageLinks?.thumbnail && (
@@ -44,10 +82,10 @@ export default function BookDetails({ params }) {
           onClick={toggleFavorite}
           className="px-6 py-3 rounded-full text-white font-semibold shadow-md transition-all duration-300 transform hover:scale-105"
           style={{
-            backgroundColor: favoriteBooks.includes(id) ? "#EF4444" : "#feb633",
+            backgroundColor: favoriteBook.includes(id) ? "#EF4444" : "#feb633",
           }}
         >
-          {favoriteBooks.includes(id)
+          {favoriteBook.includes(id)
             ? "❤️ Livro Favorito"
             : "🤍 Adicionar aos Favoritos"}
         </button>

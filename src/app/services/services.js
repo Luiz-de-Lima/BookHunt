@@ -20,6 +20,7 @@ export async function getBookDetails(id) {
     }
     try {
         const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${id}`)
+       
         if (!response.ok) {
             throw new Error(`Erro ao buscar o livro ${response.statusText}`)
         }

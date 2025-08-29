@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import BookCard from "./components/BookCard";
 import { Header } from "./components/Header";
 import { searchBooks } from "./services/services";
-import Link from "next/link";
 
 export default function Home() {
   const [books, setBooks] = useState([]);
@@ -11,7 +10,6 @@ export default function Home() {
     async function loadingBooks() {
       const result = await searchBooks("Javascript");
       setBooks(result);
-      console.log(result);
     }
     loadingBooks();
   }, []);

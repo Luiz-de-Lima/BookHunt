@@ -2,6 +2,7 @@ import Link from "next/link";
 
 export default function BookCard({ livro }) {
   const livroId = livro.id;
+
   const { volumeInfo: dadosDoLivro } = livro;
 
   return (
@@ -17,7 +18,7 @@ export default function BookCard({ livro }) {
           {dadosDoLivro.authors?.join(", ")}
         </p>
         <Link
-          href={`/books/${livroId}`}
+          href={`/${livroId}`}
           className="mt-2 px-4 py-2 bg-[#feb633] text-white text-bold rounded hover:bg-yellow-500 hover:text-gray-200 transition font-semibold"
         >
           Ver mais
