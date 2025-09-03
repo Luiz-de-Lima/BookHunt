@@ -56,7 +56,7 @@ export default function BookDetails({ params }) {
     return <p>Livro não encontrado ou erro ao carregar.</p>;
   }
   const { volumeInfo } = bookData;
-  console.log(volumeInfo);
+ 
   return (
     <div className="container mx-auto p-4 max-w-2xl bg-[#e8edf7bd]">
       <Link href="/">
