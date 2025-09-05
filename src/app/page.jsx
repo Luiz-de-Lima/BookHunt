@@ -2,11 +2,11 @@
 import { useEffect, useState } from "react";
 import BookCard from "./components/BookCard";
 import { Header } from "./components/Header";
-import { listBooks, searchBooks } from "./services/services";
+import { searchBooks } from "./services/services";
 
 export default function Home() {
   const [books, setBooks] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const loadingBooks = async () => {
     setIsLoading(true);
@@ -24,13 +24,14 @@ export default function Home() {
   }, []);
 
   const handleSearch = async (searchTermo) => {
-    if (!searchTermo.trim() && searchTermo === "") {
+    console.log(searchTermo);
+    if (!searchTermo.trim()) {
       loadingBooks();
       return;
     }
     setIsLoading(true);
     try {
-      const results = await listBooks(searchTermo);
+      const results = await searchBooks(searchTermo);
       setBooks(results);
     } catch (error) {
       console.error(`Falha ao buscar Livros: ${error}`);
@@ -46,7 +47,7 @@ export default function Home() {
 
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {isLoading ? (
-          <p>Buscando Livros...</p>
+          <p>Carregando livros...</p>
         ) : books.length > 0 ? (
           books.map((livro) => <BookCard key={livro.id} livro={livro} />)
         ) : (

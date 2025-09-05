@@ -1,13 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import { listBooks } from "../services/services";
 
 export const SearchBar = ({ onSearch }) => {
   const [termo, setTermo] = useState("");
   const handleSearch = (e) => {
+    const value = e.target.value;
     e.preventDefault();
-
-    onSearch(termo);
+    if (value) {
+      setTermo(value);
+      onSearch(termo);
+    }
   };
   return (
     <form
@@ -17,7 +19,7 @@ export const SearchBar = ({ onSearch }) => {
       <input
         type="text"
         value={termo}
-        onChange={(e) => setTermo(e.target.value)}
+        onChange={handleSearch}
         placeholder="Pesquisar por livros..."
         className="flex-grow p-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
       />
