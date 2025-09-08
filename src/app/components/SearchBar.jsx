@@ -1,15 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export const SearchBar = ({ onSearch }) => {
-  const [termo, setTermo] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
   const handleSearch = (e) => {
-    const value = e.target.value;
     e.preventDefault();
-    if (value) {
-      setTermo(value);
-      onSearch(termo);
-    }
+    e.preventDefault();
+    onSearch(searchTerm);
   };
   return (
     <form
@@ -18,8 +16,8 @@ export const SearchBar = ({ onSearch }) => {
     >
       <input
         type="text"
-        value={termo}
-        onChange={handleSearch}
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Pesquisar por livros..."
         className="flex-grow p-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
       />

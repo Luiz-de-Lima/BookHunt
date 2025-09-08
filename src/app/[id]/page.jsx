@@ -49,7 +49,7 @@ export default function BookDetails({ params }) {
     }
   };
   if (isLoading) {
-    // Verifica o estado de carregamento
+    
     return <p>Carregando detalhes do livro...</p>;
   }
   if (!bookData || bookData.error) {

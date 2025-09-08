@@ -24,7 +24,6 @@ export default function Home() {
   }, []);
 
   const handleSearch = async (searchTermo) => {
-    console.log(searchTermo);
     if (!searchTermo.trim()) {
       loadingBooks();
       return;
