@@ -1,8 +1,10 @@
 import Link from "next/link";
 
 export default function BookCard({ livro }) {
+  if (!livro || !livro.id) {
+    return null;
+  }
   const livroId = livro.id;
-
   const { volumeInfo: dadosDoLivro } = livro;
 
   return (

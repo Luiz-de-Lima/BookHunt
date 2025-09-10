@@ -6,7 +6,6 @@ export const SearchBar = ({ onSearch }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    e.preventDefault();
     onSearch(searchTerm);
   };
   return (
