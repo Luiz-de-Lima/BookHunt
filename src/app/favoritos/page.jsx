@@ -24,9 +24,7 @@ export default function FavoritesPage() {
         const validFavoriteIds = parsedFavorites.filter(Boolean);
 
         if (validFavoriteIds.length > 0) {
-         
-
-         const details = await Promise.all(
+          const details = await Promise.all(
             validFavoriteIds.map(async (id) => {
               const bookDetail = await getBookDetails(id);
               return bookDetail;
@@ -34,7 +32,6 @@ export default function FavoritesPage() {
           );
 
           setFavoriteDetails(details);
-     
         } else {
           setFavoriteDetails([]);
         }
@@ -46,14 +43,13 @@ export default function FavoritesPage() {
       }
     };
     fetchFavoriteDetails();
-  }, []); // Este efeito é disparado quando a lista de IDs de favoritos muda
-
+  }, []);
   return (
     <main className="max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl p-8 justify-items-center grid gap-4">
       <h1 className="text-3xl font-bold mb-4">Meus Livros Favoritos</h1>
       <Link href="/">
         <button className="mb-4 px-4 py-2 bg-[#feb633] text-gray-700 font-semibold rounded hover:bg-yellow-400">
-          ← Voltar para a busca
+          ← Voltar para a lista de busca
         </button>
       </Link>
 

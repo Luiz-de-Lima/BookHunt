@@ -15,7 +15,7 @@ export const Header = ({ onSearch }) => {
     }
   }, []);
   return (
-    <header className="w-full bg-[#e8edf7bd] py-4 px-6 shadow-md flex flex-col md:flex-row justify-between items-center border-solid border-red-500 rounded-2xl">
+    <header className="w-full bg-[#e8edf7bd] py-4 px-6 shadow-md flex flex-col md:flex-row justify-between items-center border-solid border-red-500 rounded-2xl gap-4">
       <div className="max-w-4xl mx-auto flex items-center justify-between px-4">
         <h1 className="text-yellow-400 text-2xl font-bold focus:outline-none">
           BookHunt
