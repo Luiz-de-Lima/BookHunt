@@ -15,7 +15,7 @@ export const Header = ({ onSearch }) => {
     }
   }, []);
   return (
-    <header className="w-full bg-[#e8edf7bd] py-4 px-6 shadow-md flex flex-col md:flex-row justify-between items-center border-solid border-red-500 rounded-2xl gap-4">
+    <header className="w-full bg-[#e8edf7bd] py-4 px-6 shadow-md flex flex-col md:flex-row justify-between items-center   border-solid border-red-500 rounded-2xl gap-4">
       <div className="max-w-4xl mx-auto flex items-center justify-between px-4">
         <h1 className="text-yellow-400 text-2xl font-bold focus:outline-none">
           BookHunt
@@ -24,7 +24,7 @@ export const Header = ({ onSearch }) => {
       <SearchBar onSearch={onSearch} />
       {hasFavorites && (
         <Link href="/favoritos">
-          <button className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+          <button className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">g
             Meus Favoritos
           </button>
         </Link>
